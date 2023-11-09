@@ -151,7 +151,9 @@
                 "name": "Interchange Control Standards Identifier",
                 "req": "M",
                 "data_type": "ID",
-                "data_type_ids": null,
+                "data_type_ids": {
+                    "U": "U.S. EDI Community of ASC X12, TDCC, and UCS"
+                },
                 "length": {
                     "min": 1,
                     "max": 1
@@ -165,7 +167,7 @@
                 "req": "M",
                 "data_type": "ID",
                 "data_type_ids": {
-                    "U": "(default)"
+                    "00304": "Draft Standards for Trial Use Approved for Publication by ASC X12 Procedures Review Board through October 1993"
                 },
                 "length": {
                     "min": 5,
@@ -189,17 +191,20 @@
             {
                 "id": "ISA14",
                 "type": "element",
-                "name": "Acknowledgment Requested",
+                "name": "Acknowledgment Requested Code",
                 "req": "M",
                 "data_type": "ID",
                 "data_type_ids": {
-                    "0": "Requested"
+                    "0": "No Interchange Acknowledgment Requested",
+                    "1": "Interchange Acknowledgment Requested (TA1)",
+                    "2": "Interchange Acknowledgment Requested only when Interchange is 'Rejected Because Of Errors'",
+                    "3": "Interchange Acknowledgment Requested only when Interchange is 'Rejected Because Of Errors' or 'Accepted but Errors are Noted'"
                 },
                 "length": {
                     "min": 1,
                     "max": 1
                 },
-                "notes": "Code sent by the sender to request an interchange acknowledgment (TA1)"
+                "notes": "Code indicating sender's request for an interchange acknowledgment"
             },
             {
                 "id": "ISA15",
@@ -223,12 +228,8 @@
                 "type": "element",
                 "name": "Component Element Separator",
                 "req": "M",
-                "data_type": "",
-                "data_type_ids": {
-                    "T": "Test",
-                    "P": "Production",
-                    "I": "Information"
-                },
+                "data_type": "AN",
+                "data_type_ids": null,
                 "length": {
                     "min": 1,
                     "max": 1
