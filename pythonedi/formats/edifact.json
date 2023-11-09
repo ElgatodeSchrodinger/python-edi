@@ -1,0 +1,4002 @@
+[
+    {
+        "id": "UNH",
+        "type": "segment",
+        "name": "Message Header",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To head, identify and specify a message.",
+        "length": {
+            "min": 10,
+            "max": 10
+        },
+        "elements": [
+            {
+                "id": "UNH01",
+                "type": "element",
+                "name": "Unique message reference assigned by the sender",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 14
+                },
+                "notes": "Unique message reference assigned by the sender"
+            },
+            {
+                "id": "UNH02",
+                "type": "element",
+                "name": "Authorization Information",
+                "req": "M",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "elements": [
+                    {
+                        "id": "UNH0201",
+                        "type": "element",
+                        "name": "Message type",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "ORDERS": "Purchase order message"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 6
+                        },
+                        "notes": "Code identifying a type of message and assigned by its controlling agency."
+                    },
+                    {
+                        "id": "UNH0202",
+                        "type": "element",
+                        "name": "Message version number",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Version number of a message type"
+                    },
+                    {
+                        "id": "UNH0203",
+                        "type": "element",
+                        "name": "Message release number",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Release number within the current message type version number (0052)."
+                    },
+                    {
+                        "id": "UNH0204",
+                        "type": "element",
+                        "name": "Controlling agency",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "notes": "Code to identify the agency controlling the specification, maintenance and publication of the message type."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "BGM",
+        "type": "segment",
+        "name": "Beginning of message",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To indicate the type and function of a message and to transmit the identifying number.",
+        "elements": [
+            {
+                "id": "BGM01",
+                "type": "element",
+                "name": "Document/message name",
+                "req": "M",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Identification of a type of document/message by code or name. Code preferred.",
+                "elements": [
+                    {
+                        "id": "BGM0101",
+                        "type": "element",
+                        "name": "Document/message name, coded",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "220": "Order"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "notes": "Code to identify the agency controlling the specification, maintenance and publication of the message type."
+                    }
+                ]
+            },
+            {
+                "id": "BGM02",
+                "type": "element",
+                "name": "Document/message number",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 35
+                },
+                "notes": "Reference number assigned to the document/message by the issuer"
+            },
+            {
+                "id": "BGM03",
+                "type": "element",
+                "name": "Message function, coded",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": {
+                    "9": "Original"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Code indicating the function of the message"
+            }
+        ]
+    },
+    {
+        "id": "DTM",
+        "type": "segment",
+        "name": "Date/time/period",
+        "req": "M",
+        "max_uses": 35,
+        "notes": "To specify date, and/or time, or period.",
+        "elements": [
+            {
+                "id": "DTM01",
+                "type": "element",
+                "name": "Date/time/period",
+                "req": "M",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Code specifying type of date or time, or both date and time",
+                "elements": [
+                    {
+                        "id": "BGM0101",
+                        "type": "element",
+                        "name": "Date/time/period qualifier",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "2": "Delivery date/time, requested",
+                            "61": "Cancel if not delivered by this date",
+                            "137": "Document/message date/time"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Code indicating the function of the message"
+                    },
+                    {
+                        "id": "BGM0102",
+                        "type": "element",
+                        "name": "Date/time/period",
+                        "req": "O",
+                        "data_type": "DT",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "The value of a date, a date and time, a time or of a period in a specified representation."
+                    },
+                    {
+                        "id": "BGM0103",
+                        "type": "element",
+                        "name": "Date/time/period format qualifier",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "102": "CCYYMMDD"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "The value of a date, a date and time, a time or of a period in a specified representation."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "FTX",
+        "type": "segment",
+        "name": "Free text",
+        "req": "O",
+        "max_uses": 99,
+        "notes": "To provide free form or coded text information.",
+        "length": {
+            "min": 10,
+            "max": 10
+        },
+        "elements": [
+            {
+                "id": "FTX01",
+                "type": "element",
+                "name": "Text subject qualifier",
+                "req": "M",
+                "data_type": "AN",
+                "notes": "Code specifying subject of a free text.",
+                "data_type_ids": {
+                    "ZZZ": "Mutually defined",
+                    "PUR": "Purchasing information"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                }
+            },
+            {
+                "id": "FTX02",
+                "type": "element",
+                "name": "Authorization Information",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": {
+                    "1": "Text for subsequent use",
+                    "2": "Text replacing missing code",
+                    "3": "Text for immediate use",
+                    "4": "No action required"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Code specifying how to handle the text."
+            },
+            {
+                "id": "FTX03",
+                "type": "element",
+                "name": "Text reference",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Coded reference to a standard text and its source.",
+                "elements": [
+                    {
+                        "id": "FTX0301",
+                        "type": "element",
+                        "name": "Free text, coded",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Free text in coded form."
+                    }
+                ]
+            },
+            {
+                "id": "FTX04",
+                "type": "element",
+                "name": "Text literal",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "notes": "Free text; one to five lines.",
+                "elements": [
+                    {
+                        "id": "FTX0401",
+                        "type": "element",
+                        "name": "Free text",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 70
+                        },
+                        "notes": "Free text field available to the message sender for information."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "RFF",
+        "type": "segment",
+        "name": "Reference",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To specify a reference",
+        "elements": [
+            {
+                "id": "RFF01",
+                "type": "element",
+                "name": "Reference",
+                "req": "M",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Identification of a reference",
+                "elements": [
+                    {
+                        "id": "RFF0101",
+                        "type": "element",
+                        "name": "Reference qualifier",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "SD": "Sales department number"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        }
+                    },
+                    {
+                        "id": "RFF0102",
+                        "type": "element",
+                        "name": "Reference number",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "Identification number the nature and function of which can be qualified by an entry in data element 1153 Reference qualifier"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "NAD",
+        "type": "segment",
+        "name": "Name and address",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To specify the name/address and their related function, either by CO82 only and/or unstructured by CO58 or structured by CO80 thru 3207.",
+        "elements": [
+            {
+                "id": "NAD01",
+                "type": "element",
+                "name": "Party qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "SU": "Supplier",
+                    "ST": "Ship To"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Code giving specific meaning to a party"
+            },
+            {
+                "id": "NAD02",
+                "type": "element",
+                "name": "Party identification details",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Identification of a reference",
+                "elements": [
+                    {
+                        "id": "RFF0201",
+                        "type": "element",
+                        "name": "Party id. identification",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "Code identifying a party involved in a transaction"
+                    },
+                    {
+                        "id": "RFF0202",
+                        "type": "element",
+                        "name": "Code list qualifier",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of a code list"
+                    }
+                ]
+            },
+            {
+                "id": "NAD03",
+                "type": "element",
+                "name": "Name and address",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Unstructured name and address: one to five lines",
+                "elements": [
+                    {
+                        "id": "NAD0301",
+                        "type": "element",
+                        "name": "Name and address line",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "Free form name and address description"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "CUX",
+        "type": "segment",
+        "name": "Currencies",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To specify currencies used in the transaction and relevant details for the rate of exchange",
+        "elements": [
+            {
+                "id": "CUX01",
+                "type": "element",
+                "name": "Currency details",
+                "req": "M",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "The usage to which a currency relates",
+                "elements": [
+                    {
+                        "id": "CUX0101",
+                        "type": "element",
+                        "name": "Currency details qualifier",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "2": "Reference currency"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Specification of the usage to which the currency relates"
+                    },
+                    {
+                        "id": "CUX0102",
+                        "type": "element",
+                        "name": "Currency, coded",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "2": "Reference currency"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of the name or symbol of the monetary unit involved in the transaction"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "PAT",
+        "type": "segment",
+        "name": "Payment terms basis",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To specify the payment terms basis",
+        "elements": [
+            {
+                "id": "PAT01",
+                "type": "element",
+                "name": "Payment terms type qualifier",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": {
+                    "1": "Basic"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Identification of the type of payment terms"
+            },
+            {
+                "id": "PAT02",
+                "type": "element",
+                "name": "Payment terms",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "notes": "This should be a unique control # for each transaction set functional group",
+                "elements": [
+                    {
+                        "id": "PAT0201",
+                        "type": "element",
+                        "name": "Terms of payment identification",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "1": "Draft(s) drawn on issuing bank",
+                            "2": "Draft(s) drawn on advising bank",
+                            "3": "Draft(s) drawn on reimbursing bank",
+                            "4": "Draft(s) drawn on applicant",
+                            "5": "Draft(s) drawn on any other drawee",
+                            "6": "No drafts"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 17
+                        },
+                        "notes": "Identification of the terms of payment between the parties to a transaction (generic term)"
+                    }
+                ]
+            },
+            {
+                "id": "PAT03",
+                "type": "element",
+                "name": "Terms/time information",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Time details in payment terms",
+                "elements": [
+                    {
+                        "id": "PAT0301",
+                        "type": "element",
+                        "name": "Payment time reference, coded",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "5": "Date of invoice"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Code relating payment terms to the date of a specific event"
+                    },
+                    {
+                        "id": "PAT0302",
+                        "type": "element",
+                        "name": "Time relation, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "1": "Reference date",
+                            "2": "Before reference",
+                            "3": "After reference",
+                            "4": "End of 10-day period containing the reference date",
+                            "5": "End of 2-week period containing the reference date",
+                            "6": "End of month containing the reference date",
+                            "7": "End of the month following the month of reference date",
+                            "8": "End of quarter containing the reference date",
+                            "9": "End of year containing the reference date",
+                            "10": "End of week containing the reference date",
+                            "11": "End of ten day period following month after reference date's month",
+                            "12": "End of half year containing the reference date"
+                        },
+                        "notes": "Code relating payment terms to a time before, on or after the reference date"
+                    },
+                    {
+                        "id": "PAT0303",
+                        "type": "element",
+                        "name": "Type of period, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "data_type_ids": {
+                            "3M": "Quarter",
+                            "6M": "Half-year",
+                            "AA": "Air hour",
+                            "AD": "Air day",
+                            "CD": "Calendar day (includes weekends and holidays)",
+                            "CW": "Calendar week (7day)",
+                            "D": "Day",
+                            "DC": "Ten days period",
+                            "DW": "Work day",
+                            "F": "Period of two weeks",
+                            "H": "Hour",
+                            "HM": "Half month",
+                            "M": "Month",
+                            "MN": "Minute",
+                            "P": "Four month period",
+                            "S": "Second",
+                            "SD": "Surface day",
+                            "SI": "Indefinite",
+                            "W": "Week",
+                            "WD": "Working days",
+                            "WW": "5 day work week",
+                            "Y": "Year",
+                            "ZZZ": "Mutually defined"
+                        },
+                        "notes": "Agreed or specified period of time (coded)"
+                    }
+                ]
+            },
+            {
+                "id": "PAT04",
+                "type": "element",
+                "name": "Number of periods",
+                "req": "O",
+                "data_type": "AN",
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "data_type_ids": null,
+                "notes": "Number of periods of the type indicated in data element 2151 Type of period, coded"
+            }
+        ]
+    },
+    {
+        "id": "LIN",
+        "type": "segment",
+        "name": "Line item",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To identify a line item and configuration",
+        "elements": [
+            {
+                "id": "LIN01",
+                "type": "element",
+                "name": "Line item number",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 6
+                },
+                "notes": "Serial number designating each separate item within a series of articles"
+            },
+            {
+                "id": "LIN02",
+                "type": "element",
+                "name": "Action request/notification, coded",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "1": "Added",
+                    "2": "Deleted",
+                    "3": "Changed",
+                    "4": "No action",
+                    "5": "Accepted without amendment",
+                    "6": "Accepted with amendment",
+                    "7": "Not accepted",
+                    "8": "Schedule only",
+                    "9": "Amendments",
+                    "10": "Not found",
+                    "11": "Not amended",
+                    "12": "Line item numbers changed",
+                    "13": "Buyer has deducted amount",
+                    "14": "Buyer claims against invoice",
+                    "15": "Charge back by seller",
+                    "16": "Seller will issue credit note",
+                    "17": "Terms changed for new terms",
+                    "18": "Abide outcome of negotiations",
+                    "19": "Seller rejects dispute",
+                    "20": "Settlement",
+                    "21": "No delivery",
+                    "22": "Call-off delivery",
+                    "23": "Proposed amendment",
+                    "24": "Accepted with amendment, no confirmation required"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Code specifying the action to be taken or already taken"
+            },
+            {
+                "id": "LIN03",
+                "type": "element",
+                "name": "Item number identification",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Goods identification for a specified source",
+                "elements": [
+                    {
+                        "id": "LIN0301",
+                        "type": "element",
+                        "name": "Action request/notification, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Code specifying the action to be taken or already taken"
+                    },
+                    {
+                        "id": "LIN0302",
+                        "type": "element",
+                        "name": "Item number type, coded",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "AA": "Product version number",
+                            "AB": "Assembly",
+                            "AC": "HIBC (Health Industry Bar Code)",
+                            "AD": "Cold roll number",
+                            "AE": "Hot roll number",
+                            "AF": "Slab number",
+                            "AG": "Software revision number",
+                            "AH": "UPC (Universal Product Code) Consumer package code (1-5-5)",
+                            "AI": "UPC (Universal Product Code) Consumer package code (1-5-5-1)",
+                            "AJ": "Sample number",
+                            "AK": "Pack number",
+                            "AL": "UPC (Universal Product Code) Shipping container code (1-2-5- 5)",
+                            "AM": "UPC (Universal Product Code)/EAN (European article number) Shipping container code (1-2-5-5-1)",
+                            "AN": "UPC (Universal Product Code) suffix",
+                            "AO": "State label code",
+                            "AP": "Heat number",
+                            "AT": "Price look up number",
+                            "AU": "NSN (North Atlantic Treaty Organization Stock Number)",
+                            "BO": "Buyers color",
+                            "BP": "Buyer's part number",
+                            "CC": "Industry commodity code",
+                            "CG": "Commodity grouping",
+                            "CL": "Color number",
+                            "CR": "Contract number",
+                            "CV": "Customs article number",
+                            "DR": "Drawing revision number",
+                            "DW": "Drawing",
+                            "EC": "Engineering change level",
+                            "EF": "Material code",
+                            "EN": "International Article Numbering Association (EAN)",
+                            "GB": "Buyer's internal product group code",
+                            "GN": "National product group code",
+                            "GS": "General specification number",
+                            "HS": "Harmonised system",
+                            "IB": "ISBN (International Standard Book Number)",
+                            "IN": "Buyer's item number",
+                            "IS": "ISSN (International Standard Serial Number)",
+                            "IT": "Buyer's style number",
+                            "IZ": "Buyer's size code",
+                            "MA": "Machine number",
+                            "MF": "Manufacturer's (producer's) article number",
+                            "MN": "Model number",
+                            "MP": "Product/service identification number",
+                            "NB": "Batch number",
+                            "ON": "Customer order number",
+                            "PD": "Part number description",
+                            "PL": "Purchaser's order line number",
+                            "PO": "Purchase order number",
+                            "PV": "Promotional variant number",
+                            "QS": "Buyer's qualifier for size",
+                            "RC": "Returnable container number",
+                            "RN": "Release number",
+                            "RU": "Run number",
+                            "RY": "Record keeping of model year",
+                            "SA": "Supplier's article number",
+                            "SG": "Standard group of products (mixed assortment)",
+                            "SK": "SKU (Stock keeping unit)",
+                            "SN": "Serial number",
+                            "SRS": "RSK number",
+                            "SS": "Supplier's supplier article number",
+                            "ST": "Style number",
+                            "TG": "Transport group number",
+                            "UA": "Ultimate customer's article number",
+                            "UP": "UPC (Universal product code)",
+                            "VN": "Vendor item number",
+                            "VP": "Vendor's (seller's) part number",
+                            "VS": "Vendor's supplemental item number",
+                            "VX": "Vendor specification number",
+                            "ZZZ": "Mutually defined"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of the type of item number"
+                    },
+                    {
+                        "id": "LIN0303",
+                        "type": "element",
+                        "name": "Code list qualifier",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "12": "Telephone directory"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of a code list"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "PIA",
+        "type": "segment",
+        "name": "Additional product id",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To specify additional or substitutional item identification codes",
+        "elements": [
+            {
+                "id": "PIA01",
+                "type": "element",
+                "name": "Product id. function qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "1": "Additional identification",
+                    "2": "Identification for potential substitution",
+                    "3": "Substituted by",
+                    "4": "Substituted for",
+                    "5": "Product identification",
+                    "6": "Successor product id",
+                    "7": "Predecessor product id",
+                    "8": "Expired/out of production"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Indication of the function of the product code"
+            },
+            {
+                "id": "PIA02",
+                "type": "element",
+                "name": "Item number identification",
+                "req": "M",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Goods identification for a specified source",
+                "elements": [
+                    {
+                        "id": "PIA0201",
+                        "type": "element",
+                        "name": "Item number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "A number allocated to a group or item"
+                    },
+                    {
+                        "id": "PIA0202",
+                        "type": "element",
+                        "name": "Item number type, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "AA": "Product version number",
+                            "AB": "Assembly",
+                            "AC": "HIBC (Health Industry Bar Code)",
+                            "AD": "Cold roll number",
+                            "AE": "Hot roll number",
+                            "AF": "Slab number",
+                            "AG": "Software revision number",
+                            "AH": "UPC (Universal Product Code) Consumer package code (1-5-5)",
+                            "AI": "UPC (Universal Product Code) Consumer package code (1-5-5-1)",
+                            "AJ": "Sample number",
+                            "AK": "Pack number",
+                            "AL": "UPC (Universal Product Code) Shipping container code (1-2-5- 5)",
+                            "AM": "UPC (Universal Product Code)/EAN (European article number) Shipping container code (1-2-5-5-1)",
+                            "AN": "UPC (Universal Product Code) suffix",
+                            "AO": "State label code",
+                            "AP": "Heat number",
+                            "AT": "Price look up number",
+                            "AU": "NSN (North Atlantic Treaty Organization Stock Number)",
+                            "BO": "Buyers color",
+                            "BP": "Buyer's part number",
+                            "CC": "Industry commodity code",
+                            "CG": "Commodity grouping",
+                            "CL": "Color number",
+                            "CR": "Contract number",
+                            "CV": "Customs article number",
+                            "DR": "Drawing revision number",
+                            "DW": "Drawing",
+                            "EC": "Engineering change level",
+                            "EF": "Material code",
+                            "EN": "International Article Numbering Association (EAN)",
+                            "GB": "Buyer's internal product group code",
+                            "GN": "National product group code",
+                            "GS": "General specification number",
+                            "HS": "Harmonised system",
+                            "IB": "ISBN (International Standard Book Number)",
+                            "IN": "Buyer's item number",
+                            "IS": "ISSN (International Standard Serial Number)",
+                            "IT": "Buyer's style number",
+                            "IZ": "Buyer's size code",
+                            "MA": "Machine number",
+                            "MF": "Manufacturer's (producer's) article number",
+                            "MN": "Model number",
+                            "MP": "Product/service identification number",
+                            "NB": "Batch number",
+                            "ON": "Customer order number",
+                            "PD": "Part number description",
+                            "PL": "Purchaser's order line number",
+                            "PO": "Purchase order number",
+                            "PV": "Promotional variant number",
+                            "QS": "Buyer's qualifier for size",
+                            "RC": "Returnable container number",
+                            "RN": "Release number",
+                            "RU": "Run number",
+                            "RY": "Record keeping of model year",
+                            "SA": "Supplier's article number",
+                            "SG": "Standard group of products (mixed assortment)",
+                            "SK": "SKU (Stock keeping unit)",
+                            "SN": "Serial number",
+                            "SRS": "RSK number",
+                            "SS": "Supplier's supplier article number",
+                            "ST": "Style number",
+                            "TG": "Transport group number",
+                            "UA": "Ultimate customer's article number",
+                            "UP": "UPC (Universal product code)",
+                            "VN": "Vendor item number",
+                            "VP": "Vendor's (seller's) part number",
+                            "VS": "Vendor's supplemental item number",
+                            "VX": "Vendor specification number",
+                            "ZZZ": "Mutually defined"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of the type of item number"
+                    }
+                ]
+            },
+            {
+                "id": "PIA03",
+                "type": "element",
+                "name": "Item number identification",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Goods identification for a specified source",
+                "elements": [
+                    {
+                        "id": "PIA0301",
+                        "type": "element",
+                        "name": "Item number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "A number allocated to a group or item"
+                    },
+                    {
+                        "id": "PIA0302",
+                        "type": "element",
+                        "name": "Item number type, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "AA": "Product version number",
+                            "AB": "Assembly",
+                            "AC": "HIBC (Health Industry Bar Code)",
+                            "AD": "Cold roll number",
+                            "AE": "Hot roll number",
+                            "AF": "Slab number",
+                            "AG": "Software revision number",
+                            "AH": "UPC (Universal Product Code) Consumer package code (1-5-5)",
+                            "AI": "UPC (Universal Product Code) Consumer package code (1-5-5-1)",
+                            "AJ": "Sample number",
+                            "AK": "Pack number",
+                            "AL": "UPC (Universal Product Code) Shipping container code (1-2-5- 5)",
+                            "AM": "UPC (Universal Product Code)/EAN (European article number) Shipping container code (1-2-5-5-1)",
+                            "AN": "UPC (Universal Product Code) suffix",
+                            "AO": "State label code",
+                            "AP": "Heat number",
+                            "AT": "Price look up number",
+                            "AU": "NSN (North Atlantic Treaty Organization Stock Number)",
+                            "BO": "Buyers color",
+                            "BP": "Buyer's part number",
+                            "CC": "Industry commodity code",
+                            "CG": "Commodity grouping",
+                            "CL": "Color number",
+                            "CR": "Contract number",
+                            "CV": "Customs article number",
+                            "DR": "Drawing revision number",
+                            "DW": "Drawing",
+                            "EC": "Engineering change level",
+                            "EF": "Material code",
+                            "EN": "International Article Numbering Association (EAN)",
+                            "GB": "Buyer's internal product group code",
+                            "GN": "National product group code",
+                            "GS": "General specification number",
+                            "HS": "Harmonised system",
+                            "IB": "ISBN (International Standard Book Number)",
+                            "IN": "Buyer's item number",
+                            "IS": "ISSN (International Standard Serial Number)",
+                            "IT": "Buyer's style number",
+                            "IZ": "Buyer's size code",
+                            "MA": "Machine number",
+                            "MF": "Manufacturer's (producer's) article number",
+                            "MN": "Model number",
+                            "MP": "Product/service identification number",
+                            "NB": "Batch number",
+                            "ON": "Customer order number",
+                            "PD": "Part number description",
+                            "PL": "Purchaser's order line number",
+                            "PO": "Purchase order number",
+                            "PV": "Promotional variant number",
+                            "QS": "Buyer's qualifier for size",
+                            "RC": "Returnable container number",
+                            "RN": "Release number",
+                            "RU": "Run number",
+                            "RY": "Record keeping of model year",
+                            "SA": "Supplier's article number",
+                            "SG": "Standard group of products (mixed assortment)",
+                            "SK": "SKU (Stock keeping unit)",
+                            "SN": "Serial number",
+                            "SRS": "RSK number",
+                            "SS": "Supplier's supplier article number",
+                            "ST": "Style number",
+                            "TG": "Transport group number",
+                            "UA": "Ultimate customer's article number",
+                            "UP": "UPC (Universal product code)",
+                            "VN": "Vendor item number",
+                            "VP": "Vendor's (seller's) part number",
+                            "VS": "Vendor's supplemental item number",
+                            "VX": "Vendor specification number",
+                            "ZZZ": "Mutually defined"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of the type of item number"
+                    }
+                ]
+            },
+            {
+                "id": "PIA04",
+                "type": "element",
+                "name": "Item number identification",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Goods identification for a specified source",
+                "elements": [
+                    {
+                        "id": "PIA0401",
+                        "type": "element",
+                        "name": "Item number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "A number allocated to a group or item"
+                    },
+                    {
+                        "id": "PIA0402",
+                        "type": "element",
+                        "name": "Item number type, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "AA": "Product version number",
+                            "AB": "Assembly",
+                            "AC": "HIBC (Health Industry Bar Code)",
+                            "AD": "Cold roll number",
+                            "AE": "Hot roll number",
+                            "AF": "Slab number",
+                            "AG": "Software revision number",
+                            "AH": "UPC (Universal Product Code) Consumer package code (1-5-5)",
+                            "AI": "UPC (Universal Product Code) Consumer package code (1-5-5-1)",
+                            "AJ": "Sample number",
+                            "AK": "Pack number",
+                            "AL": "UPC (Universal Product Code) Shipping container code (1-2-5- 5)",
+                            "AM": "UPC (Universal Product Code)/EAN (European article number) Shipping container code (1-2-5-5-1)",
+                            "AN": "UPC (Universal Product Code) suffix",
+                            "AO": "State label code",
+                            "AP": "Heat number",
+                            "AT": "Price look up number",
+                            "AU": "NSN (North Atlantic Treaty Organization Stock Number)",
+                            "BO": "Buyers color",
+                            "BP": "Buyer's part number",
+                            "CC": "Industry commodity code",
+                            "CG": "Commodity grouping",
+                            "CL": "Color number",
+                            "CR": "Contract number",
+                            "CV": "Customs article number",
+                            "DR": "Drawing revision number",
+                            "DW": "Drawing",
+                            "EC": "Engineering change level",
+                            "EF": "Material code",
+                            "EN": "International Article Numbering Association (EAN)",
+                            "GB": "Buyer's internal product group code",
+                            "GN": "National product group code",
+                            "GS": "General specification number",
+                            "HS": "Harmonised system",
+                            "IB": "ISBN (International Standard Book Number)",
+                            "IN": "Buyer's item number",
+                            "IS": "ISSN (International Standard Serial Number)",
+                            "IT": "Buyer's style number",
+                            "IZ": "Buyer's size code",
+                            "MA": "Machine number",
+                            "MF": "Manufacturer's (producer's) article number",
+                            "MN": "Model number",
+                            "MP": "Product/service identification number",
+                            "NB": "Batch number",
+                            "ON": "Customer order number",
+                            "PD": "Part number description",
+                            "PL": "Purchaser's order line number",
+                            "PO": "Purchase order number",
+                            "PV": "Promotional variant number",
+                            "QS": "Buyer's qualifier for size",
+                            "RC": "Returnable container number",
+                            "RN": "Release number",
+                            "RU": "Run number",
+                            "RY": "Record keeping of model year",
+                            "SA": "Supplier's article number",
+                            "SG": "Standard group of products (mixed assortment)",
+                            "SK": "SKU (Stock keeping unit)",
+                            "SN": "Serial number",
+                            "SRS": "RSK number",
+                            "SS": "Supplier's supplier article number",
+                            "ST": "Style number",
+                            "TG": "Transport group number",
+                            "UA": "Ultimate customer's article number",
+                            "UP": "UPC (Universal product code)",
+                            "VN": "Vendor item number",
+                            "VP": "Vendor's (seller's) part number",
+                            "VS": "Vendor's supplemental item number",
+                            "VX": "Vendor specification number",
+                            "ZZZ": "Mutually defined"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of the type of item number"
+                    }
+                ]
+            },
+            {
+                "id": "PIA05",
+                "type": "element",
+                "name": "Item number identification",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Goods identification for a specified source",
+                "elements": [
+                    {
+                        "id": "PIA0501",
+                        "type": "element",
+                        "name": "Item number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "A number allocated to a group or item"
+                    },
+                    {
+                        "id": "PIA0502",
+                        "type": "element",
+                        "name": "Item number type, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "AA": "Product version number",
+                            "AB": "Assembly",
+                            "AC": "HIBC (Health Industry Bar Code)",
+                            "AD": "Cold roll number",
+                            "AE": "Hot roll number",
+                            "AF": "Slab number",
+                            "AG": "Software revision number",
+                            "AH": "UPC (Universal Product Code) Consumer package code (1-5-5)",
+                            "AI": "UPC (Universal Product Code) Consumer package code (1-5-5-1)",
+                            "AJ": "Sample number",
+                            "AK": "Pack number",
+                            "AL": "UPC (Universal Product Code) Shipping container code (1-2-5- 5)",
+                            "AM": "UPC (Universal Product Code)/EAN (European article number) Shipping container code (1-2-5-5-1)",
+                            "AN": "UPC (Universal Product Code) suffix",
+                            "AO": "State label code",
+                            "AP": "Heat number",
+                            "AT": "Price look up number",
+                            "AU": "NSN (North Atlantic Treaty Organization Stock Number)",
+                            "BO": "Buyers color",
+                            "BP": "Buyer's part number",
+                            "CC": "Industry commodity code",
+                            "CG": "Commodity grouping",
+                            "CL": "Color number",
+                            "CR": "Contract number",
+                            "CV": "Customs article number",
+                            "DR": "Drawing revision number",
+                            "DW": "Drawing",
+                            "EC": "Engineering change level",
+                            "EF": "Material code",
+                            "EN": "International Article Numbering Association (EAN)",
+                            "GB": "Buyer's internal product group code",
+                            "GN": "National product group code",
+                            "GS": "General specification number",
+                            "HS": "Harmonised system",
+                            "IB": "ISBN (International Standard Book Number)",
+                            "IN": "Buyer's item number",
+                            "IS": "ISSN (International Standard Serial Number)",
+                            "IT": "Buyer's style number",
+                            "IZ": "Buyer's size code",
+                            "MA": "Machine number",
+                            "MF": "Manufacturer's (producer's) article number",
+                            "MN": "Model number",
+                            "MP": "Product/service identification number",
+                            "NB": "Batch number",
+                            "ON": "Customer order number",
+                            "PD": "Part number description",
+                            "PL": "Purchaser's order line number",
+                            "PO": "Purchase order number",
+                            "PV": "Promotional variant number",
+                            "QS": "Buyer's qualifier for size",
+                            "RC": "Returnable container number",
+                            "RN": "Release number",
+                            "RU": "Run number",
+                            "RY": "Record keeping of model year",
+                            "SA": "Supplier's article number",
+                            "SG": "Standard group of products (mixed assortment)",
+                            "SK": "SKU (Stock keeping unit)",
+                            "SN": "Serial number",
+                            "SRS": "RSK number",
+                            "SS": "Supplier's supplier article number",
+                            "ST": "Style number",
+                            "TG": "Transport group number",
+                            "UA": "Ultimate customer's article number",
+                            "UP": "UPC (Universal product code)",
+                            "VN": "Vendor item number",
+                            "VP": "Vendor's (seller's) part number",
+                            "VS": "Vendor's supplemental item number",
+                            "VX": "Vendor specification number",
+                            "ZZZ": "Mutually defined"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of the type of item number"
+                    }
+                ]
+            },
+            {
+                "id": "PIA06",
+                "type": "element",
+                "name": "Item number identification",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Goods identification for a specified source",
+                "elements": [
+                    {
+                        "id": "PIA0601",
+                        "type": "element",
+                        "name": "Item number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 35
+                        },
+                        "notes": "A number allocated to a group or item"
+                    },
+                    {
+                        "id": "PIA0602",
+                        "type": "element",
+                        "name": "Item number type, coded",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "AA": "Product version number",
+                            "AB": "Assembly",
+                            "AC": "HIBC (Health Industry Bar Code)",
+                            "AD": "Cold roll number",
+                            "AE": "Hot roll number",
+                            "AF": "Slab number",
+                            "AG": "Software revision number",
+                            "AH": "UPC (Universal Product Code) Consumer package code (1-5-5)",
+                            "AI": "UPC (Universal Product Code) Consumer package code (1-5-5-1)",
+                            "AJ": "Sample number",
+                            "AK": "Pack number",
+                            "AL": "UPC (Universal Product Code) Shipping container code (1-2-5- 5)",
+                            "AM": "UPC (Universal Product Code)/EAN (European article number) Shipping container code (1-2-5-5-1)",
+                            "AN": "UPC (Universal Product Code) suffix",
+                            "AO": "State label code",
+                            "AP": "Heat number",
+                            "AT": "Price look up number",
+                            "AU": "NSN (North Atlantic Treaty Organization Stock Number)",
+                            "BO": "Buyers color",
+                            "BP": "Buyer's part number",
+                            "CC": "Industry commodity code",
+                            "CG": "Commodity grouping",
+                            "CL": "Color number",
+                            "CR": "Contract number",
+                            "CV": "Customs article number",
+                            "DR": "Drawing revision number",
+                            "DW": "Drawing",
+                            "EC": "Engineering change level",
+                            "EF": "Material code",
+                            "EN": "International Article Numbering Association (EAN)",
+                            "GB": "Buyer's internal product group code",
+                            "GN": "National product group code",
+                            "GS": "General specification number",
+                            "HS": "Harmonised system",
+                            "IB": "ISBN (International Standard Book Number)",
+                            "IN": "Buyer's item number",
+                            "IS": "ISSN (International Standard Serial Number)",
+                            "IT": "Buyer's style number",
+                            "IZ": "Buyer's size code",
+                            "MA": "Machine number",
+                            "MF": "Manufacturer's (producer's) article number",
+                            "MN": "Model number",
+                            "MP": "Product/service identification number",
+                            "NB": "Batch number",
+                            "ON": "Customer order number",
+                            "PD": "Part number description",
+                            "PL": "Purchaser's order line number",
+                            "PO": "Purchase order number",
+                            "PV": "Promotional variant number",
+                            "QS": "Buyer's qualifier for size",
+                            "RC": "Returnable container number",
+                            "RN": "Release number",
+                            "RU": "Run number",
+                            "RY": "Record keeping of model year",
+                            "SA": "Supplier's article number",
+                            "SG": "Standard group of products (mixed assortment)",
+                            "SK": "SKU (Stock keeping unit)",
+                            "SN": "Serial number",
+                            "SRS": "RSK number",
+                            "SS": "Supplier's supplier article number",
+                            "ST": "Style number",
+                            "TG": "Transport group number",
+                            "UA": "Ultimate customer's article number",
+                            "UP": "UPC (Universal product code)",
+                            "VN": "Vendor item number",
+                            "VP": "Vendor's (seller's) part number",
+                            "VS": "Vendor's supplemental item number",
+                            "VX": "Vendor specification number",
+                            "ZZZ": "Mutually defined"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "notes": "Identification of the type of item number"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "IMD",
+        "type": "segment",
+        "name": "Item description",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To describe an item in either an industry or free format",
+        "elements": [
+            {
+                "id": "IMD01",
+                "type": "element",
+                "name": "Item description type, coded",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "A": "Free-form long description",
+                    "B": "Code and text",
+                    "C": "Code (from industry code list)",
+                    "D": "Free-form price look up",
+                    "E": "Free-form short description",
+                    "F": "Free-form",
+                    "S": "Structured (from industry code list)",
+                    "X": "Semi-structured (code + text)"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Code indicating the format of a description"
+            },
+            {
+                "id": "IMD02",
+                "type": "element",
+                "name": "Item characteristic, coded",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": {
+                    "1": "Certificate of conformity",
+                    "2": "General product form",
+                    "3": "Ship to stock",
+                    "4": "Finish",
+                    "5": "End use application",
+                    "8": "Product",
+                    "9": "Sub-product",
+                    "11": "Customs specifications",
+                    "12": "Type and/or process",
+                    "13": "Quality",
+                    "14": "Surface condition",
+                    "15": "Heat treat/anneal",
+                    "17": "Coating",
+                    "18": "Surface treatment, chemical",
+                    "19": "Surface treatment, mechanical",
+                    "21": "Forming",
+                    "22": "Edge treatment",
+                    "23": "Welds/splices",
+                    "24": "Control item",
+                    "25": "End treatment",
+                    "26": "Ship to line",
+                    "28": "Test sample frequency",
+                    "30": "Test sample direction",
+                    "32": "Type of test/inspection",
+                    "35": "Colour",
+                    "38": "Grade",
+                    "43": "Twist",
+                    "54": "Section profile",
+                    "56": "Special processing",
+                    "58": "Winding instructions",
+                    "59": "Surface protection",
+                    "61": "New article",
+                    "62": "Obsolete article",
+                    "63": "Current article",
+                    "64": "Revised design",
+                    "65": "Reinstated article",
+                    "66": "Current article spares",
+                    "67": "Balance out article",
+                    "68": "Initial sample",
+                    "69": "Field test",
+                    "70": "Revised article",
+                    "71": "Refurbished article",
+                    "72": "Vintage",
+                    "73": "Beverage age",
+                    "74": "Beverage brand",
+                    "75": "Artist",
+                    "76": "Author",
+                    "77": "Binding",
+                    "78": "Edition",
+                    "79": "Other physical description",
+                    "80": "Publisher",
+                    "81": "Title",
+                    "82": "Series title",
+                    "83": "Volume title",
+                    "84": "Composer",
+                    "85": "Recording medium",
+                    "86": "Music style",
+                    "87": "Promotional event",
+                    "88": "Promotional offer",
+                    "89": "Alcohol beverage class",
+                    "90": "Alcohol beverage type",
+                    "91": "Secondary grape",
+                    "92": "Primary grape",
+                    "93": "Beverage category",
+                    "94": "Beverage flavour",
+                    "95": "Wine growing region",
+                    "96": "Wine fruit",
+                    "97": "Beverage container characteristics",
+                    "98": "Size"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Code specifying the item characteristic being described"
+            },
+            {
+                "id": "IMD03",
+                "type": "element",
+                "name": "Item description",
+                "req": "O",
+                "data_type": "CO",
+                "data_type_ids": null,
+                "notes": "Description of an item",
+                "elements": [
+                    {
+                        "id": "IMD0301",
+                        "type": "element",
+                        "name": "Item description identification",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 17
+                        },
+                        "notes": "Code from an industry code list which provides specific data about a product characteristic"
+                    },
+                    {
+                        "id": "IMD0302",
+                        "type": "element",
+                        "name": "Code list qualifier",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": {
+                            "continuee....": "#########from here"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 17
+                        },
+                        "notes": "Code from an industry code list which provides specific data about a product characteristic"
+                    },
+                    {
+                        "id": "IMD0303",
+                        "type": "element",
+                        "name": "Code list responsible agency, coded",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 17
+                        },
+                        "notes": "Code from an industry code list which provides specific data about a product characteristic"
+                    },
+                    {
+                        "id": "IMD0304",
+                        "type": "element",
+                        "name": "Item description",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 17
+                        },
+                        "notes": "Code from an industry code list which provides specific data about a product characteristic"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "test": "tests"
+    },
+    {
+        "id": "ST",
+        "type": "segment",
+        "name": "Transaction Set Header",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "",
+        "elements": [
+            {
+                "id": "ST01",
+                "type": "element",
+                "name": "Transaction Set Identifier Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "810": "Invoice"
+                },
+                "length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "notes": ""
+            },
+            {
+                "id": "ST02",
+                "type": "element",
+                "name": "Transaction Set Control Number",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 4,
+                    "max": 9
+                },
+                "notes": "This should be a unique control # for each transaction set functional group"
+            }
+        ]
+    },
+    {
+        "id": "BIG",
+        "type": "segment",
+        "name": "Beginning Segment for Invoice",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "",
+        "elements": [
+            {
+                "id": "BIG01",
+                "type": "element",
+                "name": "Invoice Date",
+                "req": "M",
+                "data_type": "DT",
+                "data_type_ids": null,
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "notes": "Invoice issue date"
+            },
+            {
+                "id": "BIG02",
+                "type": "element",
+                "name": "Invoice Number",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 22
+                },
+                "notes": "Identifying number assigned by supplier"
+            },
+            {
+                "id": "BIG03",
+                "type": "element",
+                "name": "Purchase Order Date",
+                "req": "O",
+                "data_type": "DT",
+                "data_type_ids": null,
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "notes": "Original date (assigned by hospital) of the purchase order"
+            },
+            {
+                "id": "BIG04",
+                "type": "element",
+                "name": "Purchase Order Number",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 22
+                },
+                "notes": "Identifying number for purchase order assigned by hospital"
+            },
+            {
+                "id": "BIG05",
+                "type": "element",
+                "name": "Release Number",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "notes": "Only used if hospital sent the release # in original PO (element BEG04)"
+            },
+            {
+                "id": "BIG06",
+                "type": "element",
+                "name": "Change Order Seq. #",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 8
+                },
+                "notes": "Not used"
+            },
+            {
+                "id": "BIG07",
+                "type": "element",
+                "name": "Transaction Type Code",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "CN": "Credit Invoice",
+                    "CR": "Credit Memo",
+                    "DI": "Debit Invoice",
+                    "DR": "Debit Memo",
+                    "PR": "Product (or Service)"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 22
+                },
+                "notes": "Identifying number for purchase order assigned by hospital"
+            },
+            {
+                "id": "BIG08",
+                "type": "element",
+                "name": "Transaction Set Purpose Code",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "00": "Original"
+                },
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "notes": "Not used"
+            }
+        ]
+    },
+    {
+        "id": "NTE",
+        "type": "segment",
+        "name": "Note/Special Instruction",
+        "req": "O",
+        "max_uses": 100,
+        "notes": "The NTE segment permits free-form information/data which, under ANSI X12 standard implementations, is not machine processable. The use of the NTE segment should therefore be avoided, if at all possible, in an automated environment.",
+        "elements": [
+            {
+                "id": "NTE01",
+                "type": "element",
+                "name": "Note Reference Code",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "GEN": "Entire Transaction Set"
+                },
+                "length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "notes": "Code identifying the functional area or purpose for which the note applies"
+            },
+            {
+                "id": "NTE02",
+                "type": "element",
+                "name": "Description",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "notes": "A free-form description to clarify the related data elements and their content"
+            }
+        ]
+    },
+    {
+        "id": "CUR",
+        "type": "segment",
+        "name": "Currency",
+        "req": "O",
+        "max_uses": 1,
+        "notes": "If the CUR segment is not used, monetary values are assumed to be expressed in the currency of the country of the transaction originator.",
+        "elements": [
+            {
+                "id": "CUR01",
+                "type": "element",
+                "name": "Entity Identifier Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "SE": "Selling Party"
+                },
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "notes": "Code identifying an organizational entity, a physical location, property or an individual"
+            },
+            {
+                "id": "CUR02",
+                "type": "element",
+                "name": "Currency Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "USD": "US Dollars",
+                    "CAD": "Canadian Dollars"
+                },
+                "length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "notes": "Code (Standard ISO) for country in whose currency the charges are specified"
+            },
+            {
+                "id": "CUR03",
+                "type": "element",
+                "name": "Exchange Rate",
+                "req": "O",
+                "data_type": "R",
+                "data_type_ids": null,
+                "length": {
+                    "min": 4,
+                    "max": 10
+                },
+                "notes": "Value to be used as a multiplier conversion factor to convert monetary value from one currency to another"
+            }
+        ]
+    },
+    {
+        "id": "REF",
+        "type": "segment",
+        "name": "Reference Identification",
+        "req": "O",
+        "max_uses": 12,
+        "notes": "",
+        "syntax": [
+            {
+                "rule": "ATLEASTONE",
+                "criteria": [
+                    2,
+                    3
+                ]
+            }
+        ],
+        "elements": [
+            {
+                "id": "REF01",
+                "type": "element",
+                "name": "Reference Identification Qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "AP": "Accounts Receivable",
+                    "BM": "Bill of Lading Number",
+                    "CO": "Customer Order Number",
+                    "CT": "Contract Number",
+                    "LB": "Lock Box",
+                    "RE": "Release Number",
+                    "RY": "Rebate Number",
+                    "SA": "Salesperson",
+                    "SI": "Shipper's Identifying Number",
+                    "VN": "Vendor Order Number",
+                    "ZZ": "Mutually Defined"
+                },
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "notes": "Code qualifying the Reference Identification"
+            },
+            {
+                "id": "REF02",
+                "type": "element",
+                "name": "Reference Identification Number",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "notes": "Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier"
+            },
+            {
+                "id": "REF03",
+                "type": "element",
+                "name": "Description",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "notes": "A free-form description to clarify the related data elements and their content"
+            }
+        ]
+    },
+    {
+        "id": "L_N1",
+        "type": "loop",
+        "name": "Name Loop",
+        "req": "O",
+        "repeat": 200,
+        "segments": [
+            {
+                "id": "N1",
+                "type": "segment",
+                "name": "Name",
+                "req": "O",
+                "max_uses": 1,
+                "notes": "To identify a party by type of organization, name, and code",
+                "elements": [
+                    {
+                        "id": "N101",
+                        "name": "Entity Identifier Code",
+                        "type": "element",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "BT": "Bill-to-Party",
+                            "BY": "Buying Party (Purchaser)",
+                            "CA": "Carrier",
+                            "DU": "Reseller",
+                            "EN": "End User",
+                            "II": "Issuer of Invoice",
+                            "PR": "Payer",
+                            "SE": "Selling Party",
+                            "SO": "Sold To If Different From Bill To",
+                            "ST": "Ship To",
+                            "VN": "Vendor"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 3
+                        },
+                        "notes": "Code identifying an organizational entity, a physical location, property or an individual"
+                    },
+                    {
+                        "id": "N102",
+                        "name": "Name",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 60
+                        },
+                        "notes": "Free-form name"
+                    },
+                    {
+                        "id": "N103",
+                        "name": "Identification Code Qualifier",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "notes": "Code designating the system/method of code structure used for Identification Code (N104)"
+                    },
+                    {
+                        "id": "N104",
+                        "name": "Identification Code",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "1": "DUNS Number",
+                            "9": "DUNS Number with 4-digit suffix",
+                            "21": "Health Care Industry ID No.",
+                            "91": "Assigned by seller",
+                            "92": "Assigned by Buyer or Agent",
+                            "ZZ": "Mutually Defined"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "notes": "Receiver ID Number"
+                    }
+                ]
+            },
+            {
+                "id": "N2",
+                "type": "segment",
+                "name": "Additional Name Information",
+                "req": "O",
+                "max_uses": 2,
+                "notes": "To specify additional names or those longer than 35 characters in length",
+                "elements": [
+                    {
+                        "id": "N201",
+                        "type": "element",
+                        "name": "Name",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 60
+                        },
+                        "notes": "Free-form name"
+                    },
+                    {
+                        "id": "N202",
+                        "type": "element",
+                        "name": "Name",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 60
+                        },
+                        "notes": "Free-form name"
+                    }
+                ]
+            },
+            {
+                "id": "N3",
+                "type": "segment",
+                "name": "Address Information",
+                "req": "O",
+                "max_uses": 2,
+                "notes": "To specify the location of the named party",
+                "elements": [
+                    {
+                        "id": "N301",
+                        "name": "Address Information",
+                        "type": "element",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 55
+                        },
+                        "notes": "Address Information"
+                    },
+                    {
+                        "id": "N302",
+                        "name": "Address Information",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 55
+                        },
+                        "notes": "Address Information"
+                    }
+                ]
+            },
+            {
+                "id": "N4",
+                "type": "segment",
+                "name": "Geographic Location",
+                "req": "O",
+                "max_uses": 1,
+                "notes": "To specify the geographic place of the named party",
+                "elements": [
+                    {
+                        "id": "N401",
+                        "type": "element",
+                        "name": "City Name",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 2,
+                            "max": 30
+                        },
+                        "notes": "Address Information"
+                    },
+                    {
+                        "id": "N402",
+                        "type": "element",
+                        "name": "State or Province Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code (Standard State/Province) as defined by appropriate government agency"
+                    },
+                    {
+                        "id": "N403",
+                        "type": "element",
+                        "name": "Postal Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 3,
+                            "max": 15
+                        },
+                        "notes": "Code defining international postal zone code excluding punctuation and blanks (zip code for United States)"
+                    },
+                    {
+                        "id": "N404",
+                        "type": "element",
+                        "name": "Country Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 2,
+                            "max": 3
+                        },
+                        "notes": "Code identifying the country"
+                    }
+                ]
+            },
+            {
+                "id": "PER",
+                "type": "segment",
+                "name": "Administrative Communications Contact",
+                "req": "O",
+                "max_uses": 3,
+                "notes": "To identify a person or office to whom administrative communications should be directed",
+                "elements": [
+                    {
+                        "id": "PER01",
+                        "type": "element",
+                        "name": "Contact Function Code",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "CN": "General Contact",
+                            "RE": "Contact For Problems"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the major duty or responsibility of the person or group named"
+                    },
+                    {
+                        "id": "PER02",
+                        "type": "element",
+                        "name": "Name",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 60
+                        },
+                        "notes": "Free-form name"
+                    },
+                    {
+                        "id": "PER03",
+                        "type": "element",
+                        "name": "Communications Number Type",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "TE": "Telephone",
+                            "EM": "Email",
+                            "FX": "Facsimile"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the communications number type"
+                    },
+                    {
+                        "id": "PER04",
+                        "type": "element",
+                        "name": "Communications Number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 80
+                        },
+                        "notes": "Number for communications"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "ITD",
+        "type": "segment",
+        "name": "Terms of Sale/Deferred Terms of Sale",
+        "req": "O",
+        "max_uses": 10,
+        "notes": "To specify terms of sale. In the Header position of the Invoice X12 EDI document, this segment is used to specify terms of the invoice. In the transitional period for the microcomputer industry, from paper to full automated EDI transactions, there may be a perceived need to send text data with the terms. Clearly the goal is to have the entire microcomputer industry participating in EDI. Therefore, if text data is needed to be sent for terms, ITD 12 will contain the free form text. If additional text is needed, additional ITD segments should be used.",
+        "syntax": [
+            {
+                "rule": "IFATLEASTONE",
+                "criteria": [
+                    3,
+                    4,
+                    5
+                ]
+            },
+            {
+                "rule": "IFATLEASTONE",
+                "criteria": [
+                    8,
+                    4,
+                    5
+                ]
+            },
+            {
+                "rule": "IFATLEASTONE",
+                "criteria": [
+                    9,
+                    10,
+                    11
+                ]
+            }
+        ],
+        "elements": [
+            {
+                "id": "ITD01",
+                "type": "element",
+                "name": "Terms Type Code",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "14": "Previously agreed upon"
+                },
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "notes": "Code identifying type of payment terms"
+            },
+            {
+                "id": "ITD02",
+                "type": "element",
+                "name": "Terms Basis Date Code",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "3": "Invoice Date"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "notes": "Code identifying the beginning of the terms period"
+            },
+            {
+                "id": "ITD03",
+                "type": "element",
+                "name": "Terms Discount %",
+                "req": "O",
+                "data_type": "R",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 6
+                },
+                "notes": "Available to hospital if invoice is paid on or before Terms Discount Due Date"
+            },
+            {
+                "id": "ITD04",
+                "type": "element",
+                "name": "Terms Discount Due Date",
+                "req": "O",
+                "data_type": "DT",
+                "data_type_ids": null,
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "notes": "Date payment is due if discount is to be earned (CCYYMMDD)"
+            },
+            {
+                "id": "ITD05",
+                "type": "element",
+                "name": "Terms Discount Days Due",
+                "req": "O",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Maximum number of days to pass before payment is due"
+            },
+            {
+                "id": "ITD06",
+                "type": "element",
+                "name": "Terms Net Due Date",
+                "req": "O",
+                "data_type": "DT",
+                "data_type_ids": null,
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "notes": "Date when total invoice amount is due"
+            },
+            {
+                "id": "ITD07",
+                "type": "element",
+                "name": "Terms Net Days",
+                "req": "O",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "notes": "Payment terms in net days"
+            },
+            {
+                "id": "ITD08",
+                "type": "element",
+                "name": "Terms Discount Amount",
+                "req": "O",
+                "data_type": "N2",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "notes": "Total amount of terms discount"
+            },
+            {
+                "id": "ITD09",
+                "type": "element",
+                "name": "Terms Deferred Due Date",
+                "req": "O",
+                "data_type": "DT",
+                "data_type_ids": null,
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "notes": "Date deferred payment or percent of invoice payable is due"
+            },
+            {
+                "id": "ITD10",
+                "type": "element",
+                "name": "Deferred Amount Due",
+                "req": "O",
+                "data_type": "N2",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "notes": "Deferred amount due for payment"
+            },
+            {
+                "id": "ITD11",
+                "type": "element",
+                "name": "% Invoice Payable",
+                "req": "O",
+                "data_type": "R",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "notes": "Amount of invoice payable expressed in percent"
+            },
+            {
+                "id": "ITD12",
+                "type": "element",
+                "name": "Description",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "notes": "Description of terms"
+            }
+        ]
+    },
+    {
+        "id": "N9",
+        "type": "segment",
+        "name": "Reference",
+        "req": "O",
+        "max_uses": 1,
+        "notes": "Used with notes",
+        "elements": [
+            {
+                "id": "N901",
+                "type": "element",
+                "name": "Reference Ident. Qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "ZZ": "Mutually Defined"
+                },
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "notes": "Code specifying type of date or time, or both date and time"
+            },
+            {
+                "id": "N902",
+                "type": "element",
+                "name": "Reference Identification",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "notes": "MSG to Follow"
+            },
+            {
+                "id": "N903",
+                "type": "element",
+                "name": "Other",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "notes": ""
+            }
+        ]
+    },
+    {
+        "id": "MSG",
+        "type": "segment",
+        "name": "Text Message",
+        "req": "O",
+        "max_uses": 10,
+        "notes": "Free-form text",
+        "elements": [
+            {
+                "id": "MSG01",
+                "type": "element",
+                "name": "Message Text",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 264
+                },
+                "notes": "Free-form text"
+            }
+        ]
+    },
+    {
+        "id": "L_IT1",
+        "type": "loop",
+        "name": "Baseline Item Data Loop",
+        "req": "O",
+        "repeat": 200000,
+        "segments": [
+            {
+                "id": "IT1",
+                "type": "segment",
+                "name": "Baseline Item Data (Invoice)",
+                "req": "M",
+                "max_uses": 1,
+                "notes": "To specify the basic and most frequently used line item data for the invoice and related transactions",
+                "syntax": [
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            2,
+                            3,
+                            4
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            6,
+                            7
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            8,
+                            9
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            10,
+                            11
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            12,
+                            13
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            14,
+                            15
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            16,
+                            17
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            18,
+                            19
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            20,
+                            21
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            22,
+                            23
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            24,
+                            25
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "IT101",
+                        "type": "element",
+                        "name": "Assigned Identification",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "notes": "Alphanumeric characters assigned for differentiation within a transaction set. May be original line number from PO"
+                    },
+                    {
+                        "id": "IT102",
+                        "type": "element",
+                        "name": "Quantity Invoiced",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "notes": "Date expressed as CCYYMMDD"
+                    },
+                    {
+                        "id": "IT103",
+                        "type": "element",
+                        "name": "Unit or Basis for Measurement Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "EA": "Each"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code specifying the units in which a value is being expressed, or manner in which a measurement has been taken"
+                    },
+                    {
+                        "id": "IT104",
+                        "type": "element",
+                        "name": "Unit Price",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 17
+                        },
+                        "notes": "Price per unit of product, service, commodity, etc."
+                    },
+                    {
+                        "id": "IT105",
+                        "type": "element",
+                        "name": "Basis of Unit Price Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "CP": "Current Price (Subject to Change)",
+                            "NC": "No Cost"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the type of unit price for an item"
+                    },
+                    {
+                        "id": "IT106",
+                        "type": "element",
+                        "name": "Product/Service ID Qualifier",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "VP": "Vendor's (Seller's) Part Number",
+                            "MG": "Manufacturer ID"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the type/source of the descriptive number used in Product/Service ID"
+                    },
+                    {
+                        "id": "IT107",
+                        "type": "element",
+                        "name": "Product/Service ID",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 48
+                        },
+                        "notes": "Identifying number for a product or service"
+                    },
+                    {
+                        "id": "IT108",
+                        "type": "element",
+                        "name": "Product/Service ID Qualifier",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "BP": "Buyer's Part Number"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the type/source of the descriptive number used in Product/Service ID"
+                    },
+                    {
+                        "id": "IT109",
+                        "type": "element",
+                        "name": "Product/Service ID",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 48
+                        },
+                        "notes": "Identifying number for a product or service"
+                    },
+                    {
+                        "id": "IT110",
+                        "type": "element",
+                        "name": "Product/Service ID Qualifier",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "UP": "U.P.C. Consumer Package Code (1-5-5-1)"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the type/source of the descriptive number used in Product/Service ID"
+                    },
+                    {
+                        "id": "IT111",
+                        "type": "element",
+                        "name": "Product/Service ID",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 48
+                        },
+                        "notes": "Identifying number for a product or service"
+                    }
+                ]
+            },
+            {
+                "id": "TXI",
+                "type": "segment",
+                "name": "Tax Information",
+                "req": "O",
+                "max_uses": 1,
+                "notes": "To specify tax information",
+                "syntax": [
+                    {
+                        "rule": "ATLEASTONE",
+                        "criteria": [
+                            2,
+                            3,
+                            6
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            4,
+                            5
+                        ]
+                    },
+                    {
+                        "rule": "IFATLEASTONE",
+                        "criteria": [
+                            8,
+                            3
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "TXI01",
+                        "type": "element",
+                        "name": "Tax Type Code",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "ST": "State Sales Tax"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Amount before terms discount"
+                    },
+                    {
+                        "id": "TXI02",
+                        "type": "element",
+                        "name": "Monetary Amount",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 18
+                        },
+                        "notes": "Monetary amount"
+                    },
+                    {
+                        "id": "TXI03",
+                        "type": "element",
+                        "name": "Percent",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "notes": "Percentage expressed as a decimal"
+                    },
+                    {
+                        "id": "TXI04",
+                        "type": "element",
+                        "name": "Tax Jurisdiction Code Qualifier",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "CD": "Customer Defined",
+                            "VD": "Vendor Defined"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the source of the data used in tax jurisdiction code"
+                    },
+                    {
+                        "id": "TXI05",
+                        "type": "element",
+                        "name": "Tax Jurisdiction Code",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "notes": "Code identifying the taxing jurisdiction"
+                    },
+                    {
+                        "id": "TXI06",
+                        "type": "element",
+                        "name": "Tax Exempt Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "0": "Exempt (for Export)",
+                            "1": "Yes (Tax Exempt)",
+                            "2": "No (Not Tax Exempt)",
+                            "3": "Exempt (For Resale)",
+                            "4": "Not Exempt/For Resale",
+                            "5": "Exempt (Not For Resale)",
+                            "6": "Not Exempt, Not For Resale",
+                            "7": "Direct Pay ID",
+                            "8": "Exempt (Sale to U.S. Government)",
+                            "9": "Exempt (Per State Law",
+                            "A": "Labor Taxable, Material Exempt",
+                            "B": "Material Taxable, Labor Exempt",
+                            "C": "Not Taxable",
+                            "V": "Exempt from State Property Tax",
+                            "W": "Other Property Tax Exemption",
+                            "X": "Exempt - Letter on file"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "notes": "Code identifying exemption status from sales and use tax"
+                    },
+                    {
+                        "id": "TXI07",
+                        "type": "element",
+                        "name": "Relationship Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "notes": "Code indicating the relationship between entities"
+                    },
+                    {
+                        "id": "TXI08",
+                        "type": "element",
+                        "name": "Dollar Basis for Percent",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 9
+                        },
+                        "notes": "Dollar basis to be used in the percent calculation of the allowance, charge, or tax"
+                    },
+                    {
+                        "id": "TXI09",
+                        "type": "element",
+                        "name": "Tax Identification Number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "notes": "Number assigned to a purchaser (buyer, orderer) by a taxing jurisdiction (state, county, etc.); often called a tax exemption number or certificat number"
+                    },
+                    {
+                        "id": "TXI10",
+                        "type": "element",
+                        "name": "Assigned Identification",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "notes": "Alphanumeric characters assigned for differentiation within a transaction set"
+                    }
+                ]
+            },
+            {
+                "id": "L_PID",
+                "type": "loop",
+                "name": "Product/Item Description Loop",
+                "req": "O",
+                "repeat": 1000,
+                "segments": [
+                    {
+                        "id": "PID",
+                        "type": "segment",
+                        "name": "Product/Item Description",
+                        "req": "O",
+                        "max_uses": 1,
+                        "notes": "To describe a product or process in coded or free-form format",
+                        "syntax": [
+                            {
+                                "rule": "IFATLEASTONE",
+                                "criteria": [
+                                    4,
+                                    3
+                                ]
+                            },
+                            {
+                                "rule": "ATLEASTONE",
+                                "criteria": [
+                                    4,
+                                    5
+                                ]
+                            },
+                            {
+                                "rule": "IFATLEASTONE",
+                                "criteria": [
+                                    7,
+                                    3
+                                ]
+                            },
+                            {
+                                "rule": "IFATLEASTONE",
+                                "criteria": [
+                                    8,
+                                    4
+                                ]
+                            },
+                            {
+                                "rule": "IFATLEASTONE",
+                                "criteria": [
+                                    9,
+                                    5
+                                ]
+                            }
+                        ],
+                        "elements": [
+                            {
+                                "id": "PID01",
+                                "type": "element",
+                                "name": "Item Description Type",
+                                "req": "M",
+                                "data_type": "ID",
+                                "data_type_ids": {
+                                    "X": "Mutually Defined",
+                                    "F": "Freeform"
+                                },
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "notes": "Code indicating the format of a description"
+                            },
+                            {
+                                "id": "PID02",
+                                "type": "element",
+                                "name": "Product/Process Characteristic Code",
+                                "req": "O",
+                                "data_type": "ID",
+                                "data_type_ids": null,
+                                "length": {
+                                    "min": 2,
+                                    "max": 3
+                                },
+                                "notes": "Not used"
+                            },
+                            {
+                                "id": "PID03",
+                                "type": "element",
+                                "name": "Association Qualifier Code",
+                                "req": "O",
+                                "data_type": "ID",
+                                "data_type_ids": null,
+                                "length": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "notes": "Not used"
+                            },
+                            {
+                                "id": "PID04",
+                                "type": "element",
+                                "name": "Product Description Code",
+                                "req": "O",
+                                "data_type": "ID",
+                                "data_type_ids": null,
+                                "length": {
+                                    "min": 1,
+                                    "max": 12
+                                },
+                                "notes": "Not used"
+                            },
+                            {
+                                "id": "PID05",
+                                "type": "element",
+                                "name": "Description",
+                                "req": "O",
+                                "data_type": "AN",
+                                "data_type_ids": null,
+                                "length": {
+                                    "min": 1,
+                                    "max": 80
+                                },
+                                "notes": "A free-form description to clarify the related data elements and their content"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "REF",
+                "type": "segment",
+                "name": "Reference Information",
+                "req": "O",
+                "max_uses": 10,
+                "notes": "To specify other information",
+                "syntax": [],
+                "elements": [
+                    {
+                        "id": "REF01",
+                        "type": "element",
+                        "name": "Reference Code Type",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {},
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": ""
+                    },
+                    {
+                        "id": "REF02",
+                        "type": "element",
+                        "name": "Reference Code Value",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 80
+                        },
+                        "notes": ""
+                    }
+                ]
+            },
+            {
+                "id": "DTM",
+                "type": "segment",
+                "name": "Date/Time Reference",
+                "req": "O",
+                "max_uses": 10,
+                "notes": "To identify a person or office to whom administrative communications should be directed",
+                "elements": [
+                    {
+                        "id": "DTM01",
+                        "type": "element",
+                        "name": "Date/Time Qualifier",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "002": "Delivery requested",
+                            "011": "Shipped",
+                            "036": "Expiration Date"
+                        },
+                        "length": {
+                            "min": 3,
+                            "max": 3
+                        },
+                        "notes": "Code specifying type of date or time, or both date and time"
+                    },
+                    {
+                        "id": "DTM02",
+                        "type": "element",
+                        "name": "Date",
+                        "req": "O",
+                        "data_type": "DT",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 8,
+                            "max": 8
+                        },
+                        "notes": "Date expressed as CCYYMMDD"
+                    },
+                    {
+                        "id": "DTM03",
+                        "type": "element",
+                        "name": "Time",
+                        "req": "O",
+                        "data_type": "TM",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 4,
+                            "max": 8
+                        },
+                        "notes": "Time"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "TDS",
+        "type": "segment",
+        "name": "Total Monetary Value Summary",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To specify the total invoice discounts and amounts.",
+        "elements": [
+            {
+                "id": "TDS01",
+                "type": "element",
+                "name": "Total Invoice Amount",
+                "req": "M",
+                "data_type": "N2",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "notes": "Amount before terms discount"
+            },
+            {
+                "id": "TDS02",
+                "type": "element",
+                "name": "Amt. Subj. to Terms Discount",
+                "req": "O",
+                "data_type": "N2",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "notes": "Amount upon which the terms discount amount is calculated"
+            },
+            {
+                "id": "TDS03",
+                "type": "element",
+                "name": "Discounted Amount Due",
+                "req": "O",
+                "data_type": "N2",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "notes": "Amount of invoice due if paid by terms discount due date"
+            },
+            {
+                "id": "TDS04",
+                "type": "element",
+                "name": "Terms Discount Amount",
+                "req": "O",
+                "data_type": "N2",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "notes": "Total amount of terms discount"
+            }
+        ]
+    },
+    {
+        "id": "TXI",
+        "type": "segment",
+        "name": "Tax Information",
+        "req": "O",
+        "max_uses": 10,
+        "notes": "To specify tax information",
+        "syntax": [
+            {
+                "rule": "ATLEASTONE",
+                "criteria": [
+                    2,
+                    3,
+                    6
+                ]
+            },
+            {
+                "rule": "ALLORNONE",
+                "criteria": [
+                    4,
+                    5
+                ]
+            },
+            {
+                "rule": "IFATLEASTONE",
+                "criteria": [
+                    8,
+                    3
+                ]
+            }
+        ],
+        "elements": [
+            {
+                "id": "TXI01",
+                "type": "element",
+                "name": "Tax Type Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "ST": "State Sales Tax"
+                },
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "notes": "Amount before terms discount"
+            },
+            {
+                "id": "TXI02",
+                "type": "element",
+                "name": "Monetary Amount",
+                "req": "O",
+                "data_type": "R",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 18
+                },
+                "notes": "Monetary amount"
+            },
+            {
+                "id": "TXI03",
+                "type": "element",
+                "name": "Percent",
+                "req": "O",
+                "data_type": "R",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "notes": "Percentage expressed as a decimal"
+            },
+            {
+                "id": "TXI04",
+                "type": "element",
+                "name": "Tax Jurisdiction Code Qualifier",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "CD": "Customer Defined",
+                    "VD": "Vendor Defined"
+                },
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "notes": "Code identifying the source of the data used in tax jurisdiction code"
+            },
+            {
+                "id": "TXI05",
+                "type": "element",
+                "name": "Tax Jurisdiction Code",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "notes": "Code identifying the taxing jurisdiction"
+            },
+            {
+                "id": "TXI06",
+                "type": "element",
+                "name": "Tax Exempt Code",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": {
+                    "0": "Exempt (for Export)",
+                    "1": "Yes (Tax Exempt)",
+                    "2": "No (Not Tax Exempt)",
+                    "3": "Exempt (For Resale)",
+                    "4": "Not Exempt/For Resale",
+                    "5": "Exempt (Not For Resale)",
+                    "6": "Not Exempt, Not For Resale",
+                    "7": "Direct Pay ID",
+                    "8": "Exempt (Sale to U.S. Government)",
+                    "9": "Exempt (Per State Law",
+                    "A": "Labor Taxable, Material Exempt",
+                    "B": "Material Taxable, Labor Exempt",
+                    "C": "Not Taxable",
+                    "V": "Exempt from State Property Tax",
+                    "W": "Other Property Tax Exemption",
+                    "X": "Exempt - Letter on file"
+                },
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "notes": "Code identifying exemption status from sales and use tax"
+            },
+            {
+                "id": "TXI07",
+                "type": "element",
+                "name": "Relationship Code",
+                "req": "O",
+                "data_type": "ID",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "notes": "Code indicating the relationship between entities"
+            },
+            {
+                "id": "TXI08",
+                "type": "element",
+                "name": "Dollar Basis for Percent",
+                "req": "O",
+                "data_type": "R",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 9
+                },
+                "notes": "Dollar basis to be used in the percent calculation of the allowance, charge, or tax"
+            },
+            {
+                "id": "TXI09",
+                "type": "element",
+                "name": "Tax Identification Number",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "notes": "Number assigned to a purchaser (buyer, orderer) by a taxing jurisdiction (state, county, etc.); often called a tax exemption number or certificat number"
+            },
+            {
+                "id": "TXI10",
+                "type": "element",
+                "name": "Assigned Identification",
+                "req": "O",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "notes": "Alphanumeric characters assigned for differentiation within a transaction set"
+            }
+        ]
+    },
+    {
+        "id": "L_SAC",
+        "type": "loop",
+        "name": "Service, Promotion, Allowance, or Charge Information Loop",
+        "req": "O",
+        "repeat": 25,
+        "segments": [
+            {
+                "id": "SAC",
+                "type": "segment",
+                "name": "Service, Promotion, Allowance, or Charge Information",
+                "req": "O",
+                "max_uses": 1,
+                "notes": "To request or identify a service, promotion, allowance, or charge; to specify the amount or percentage for the service, promotion, allowance, or charge",
+                "syntax": [
+                    {
+                        "rule": "ATLEASTONE",
+                        "criteria": [
+                            2,
+                            3
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            3,
+                            4
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            6,
+                            7
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            9,
+                            10
+                        ]
+                    },
+                    {
+                        "rule": "IFATLEASTONE",
+                        "criteria": [
+                            11,
+                            10
+                        ]
+                    },
+                    {
+                        "rule": "IFATLEASTONE",
+                        "criteria": [
+                            13,
+                            2,
+                            4
+                        ]
+                    },
+                    {
+                        "rule": "IFATLEASTONE",
+                        "criteria": [
+                            14,
+                            13
+                        ]
+                    },
+                    {
+                        "rule": "IFATLEASTONE",
+                        "criteria": [
+                            16,
+                            15
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "SAC01",
+                        "type": "element",
+                        "name": "Allowance or Charge Indicator",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "C": "Charge"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "notes": "Code which indicates an allowance or charge for the service specified"
+                    },
+                    {
+                        "id": "SAC02",
+                        "type": "element",
+                        "name": "Service, Promotion, Allowance, or Charge Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "D240": "Freight"
+                        },
+                        "length": {
+                            "min": 4,
+                            "max": 4
+                        },
+                        "notes": "Code identifying the service, promotion, allowance, or charge"
+                    },
+                    {
+                        "id": "SAC03",
+                        "type": "element",
+                        "name": "Agency Qualifier Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the agency assigning the code values"
+                    },
+                    {
+                        "id": "SAC04",
+                        "type": "element",
+                        "name": "Agency Service, Promotion, Allowance, or Charge Code",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "notes": "Agency maintained code identifying the service, promotion, allowance, or charge"
+                    },
+                    {
+                        "id": "SAC05",
+                        "type": "element",
+                        "name": "Amount",
+                        "req": "O",
+                        "data_type": "N2",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 15
+                        },
+                        "notes": "Monetary amount"
+                    },
+                    {
+                        "id": "SAC06",
+                        "type": "element",
+                        "name": "Allowance/Charge Percent Qualifier",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "notes": "Code indicating on what basis allowance or charge percent is calculated"
+                    },
+                    {
+                        "id": "SAC07",
+                        "type": "element",
+                        "name": "Percent",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 6
+                        },
+                        "notes": "Percent expressed as a percent"
+                    },
+                    {
+                        "id": "SAC08",
+                        "type": "element",
+                        "name": "Rate",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 9
+                        },
+                        "notes": "Rate expressed in the standard monetary denomination for the currency specified"
+                    },
+                    {
+                        "id": "SAC09",
+                        "type": "element",
+                        "name": "Unit or Basis for Measurement Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code specifying the units in which a value is being expressed, or manner in which a measurement has been taken"
+                    },
+                    {
+                        "id": "SAC10",
+                        "type": "element",
+                        "name": "Quantity",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 15
+                        },
+                        "notes": "Numeric value of quantity"
+                    },
+                    {
+                        "id": "SAC11",
+                        "type": "element",
+                        "name": "Quantity",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 15
+                        },
+                        "notes": "Numeric value of quantity"
+                    },
+                    {
+                        "id": "SAC12",
+                        "type": "element",
+                        "name": "Allowance or Charge Method of Handling Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code indicating method of handling for an allowance or charge"
+                    },
+                    {
+                        "id": "SAC13",
+                        "type": "element",
+                        "name": "Reference Identification",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 30
+                        },
+                        "notes": "Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier"
+                    },
+                    {
+                        "id": "SAC14",
+                        "type": "element",
+                        "name": "Option Number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "notes": "A unique number identifying available promotion or allowance options when more than one is offered"
+                    },
+                    {
+                        "id": "SAC15",
+                        "type": "element",
+                        "name": "Description",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 80
+                        },
+                        "notes": "A free-form description to clarify the related data elements and their content"
+                    }
+                ]
+            },
+            {
+                "id": "TXI",
+                "type": "segment",
+                "name": "Tax Information",
+                "req": "O",
+                "max_uses": 1,
+                "notes": "To specify tax information",
+                "syntax": [
+                    {
+                        "rule": "ATLEASTONE",
+                        "criteria": [
+                            2,
+                            3,
+                            6
+                        ]
+                    },
+                    {
+                        "rule": "ALLORNONE",
+                        "criteria": [
+                            4,
+                            5
+                        ]
+                    },
+                    {
+                        "rule": "IFATLEASTONE",
+                        "criteria": [
+                            8,
+                            3
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "TXI01",
+                        "type": "element",
+                        "name": "Tax Type Code",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "ST": "State Sales Tax"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Amount before terms discount"
+                    },
+                    {
+                        "id": "TXI02",
+                        "type": "element",
+                        "name": "Monetary Amount",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 18
+                        },
+                        "notes": "Monetary amount"
+                    },
+                    {
+                        "id": "TXI03",
+                        "type": "element",
+                        "name": "Percent",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "notes": "Percentage expressed as a decimal"
+                    },
+                    {
+                        "id": "TXI04",
+                        "type": "element",
+                        "name": "Tax Jurisdiction Code Qualifier",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "CD": "Customer Defined",
+                            "VD": "Vendor Defined"
+                        },
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "notes": "Code identifying the source of the data used in tax jurisdiction code"
+                    },
+                    {
+                        "id": "TXI05",
+                        "type": "element",
+                        "name": "Tax Jurisdiction Code",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "notes": "Code identifying the taxing jurisdiction"
+                    },
+                    {
+                        "id": "TXI06",
+                        "type": "element",
+                        "name": "Tax Exempt Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "0": "Exempt (for Export)",
+                            "1": "Yes (Tax Exempt)",
+                            "2": "No (Not Tax Exempt)",
+                            "3": "Exempt (For Resale)",
+                            "4": "Not Exempt/For Resale",
+                            "5": "Exempt (Not For Resale)",
+                            "6": "Not Exempt, Not For Resale",
+                            "7": "Direct Pay ID",
+                            "8": "Exempt (Sale to U.S. Government)",
+                            "9": "Exempt (Per State Law",
+                            "A": "Labor Taxable, Material Exempt",
+                            "B": "Material Taxable, Labor Exempt",
+                            "C": "Not Taxable",
+                            "V": "Exempt from State Property Tax",
+                            "W": "Other Property Tax Exemption",
+                            "X": "Exempt - Letter on file"
+                        },
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "notes": "Code identifying exemption status from sales and use tax"
+                    },
+                    {
+                        "id": "TXI07",
+                        "type": "element",
+                        "name": "Relationship Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "notes": "Code indicating the relationship between entities"
+                    },
+                    {
+                        "id": "TXI08",
+                        "type": "element",
+                        "name": "Dollar Basis for Percent",
+                        "req": "O",
+                        "data_type": "R",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 9
+                        },
+                        "notes": "Dollar basis to be used in the percent calculation of the allowance, charge, or tax"
+                    },
+                    {
+                        "id": "TXI09",
+                        "type": "element",
+                        "name": "Tax Identification Number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "notes": "Number assigned to a purchaser (buyer, orderer) by a taxing jurisdiction (state, county, etc.); often called a tax exemption number or certificat number"
+                    },
+                    {
+                        "id": "TXI10",
+                        "type": "element",
+                        "name": "Assigned Identification",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "notes": "Alphanumeric characters assigned for differentiation within a transaction set"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "CTT",
+        "type": "segment",
+        "name": "Transaction Totals",
+        "req": "O",
+        "max_uses": 1,
+        "notes": "To transmit a hash total for a specific element in the transaction set",
+        "syntax": [
+            {
+                "rule": "ALLORNONE",
+                "criteria": [
+                    3,
+                    4
+                ]
+            },
+            {
+                "rule": "ALLORNONE",
+                "criteria": [
+                    5,
+                    6
+                ]
+            }
+        ],
+        "elements": [
+            {
+                "id": "CTT01",
+                "type": "element",
+                "name": "Number of Line Items",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 6
+                },
+                "notes": "Total number of line items in the transaction set"
+            },
+            {
+                "id": "CTT02",
+                "type": "element",
+                "name": "Hash totals",
+                "req": "O",
+                "data_type": "R",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "notes": "Total of the number of units invoiced (sum of element IT102)"
+            }
+        ]
+    },
+    {
+        "id": "SE",
+        "type": "segment",
+        "name": "Transaction Set Trailer",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To indicate the end of the transaction set and provide the count of the transmitted segments (including the beginning (ST) and ending (SE) segments)",
+        "elements": [
+            {
+                "id": "SE01",
+                "type": "element",
+                "name": "Number of Included Segments",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "notes": "Total number of segments included in a transaction set including ST and SE segments"
+            },
+            {
+                "id": "SE02",
+                "type": "element",
+                "name": "Transaction Set Control Number",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {
+                    "min": 4,
+                    "max": 9
+                },
+                "notes": "Identifying control number that must be unique within the transaction set functional group assigned by the originator for a transaction set. Must match the control # in ST02"
+            }
+        ]
+    },
+    {
+        "id": "GE",
+        "type": "segment",
+        "name": "Functional Group Trailer",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To indicate the end of a functional group and to provide control information",
+        "elements": [
+            {
+                "id": "GE01",
+                "type": "element",
+                "name": "Number of Transaction Sets Included",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 6
+                },
+                "notes": "Total number of transaction sets included in the functional group or interchange (transmission) group terminated by the trailer containing this data element"
+            },
+            {
+                "id": "GE02",
+                "type": "element",
+                "name": "Group Control Number",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 9
+                },
+                "notes": "Assigned number originated and maintained by the sender"
+            }
+        ]
+    },
+    {
+        "id": "IEA",
+        "type": "segment",
+        "name": "Interchange Control Trailer",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To define the end of an interchange of zero or more functional groups and interchange-related control segments",
+        "elements": [
+            {
+                "id": "IEA01",
+                "type": "element",
+                "name": "Number of Included Functional Groups",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "notes": "A count of the number of functional groups included in an interchange"
+            },
+            {
+                "id": "IEA02",
+                "type": "element",
+                "name": "Interchange Control Number",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {
+                    "min": 9,
+                    "max": 9
+                },
+                "notes": "A control number assigned by the interchange sender"
+            }
+        ]
+    }
+]
